@@ -38,6 +38,8 @@ window.addEventListener('load', async () => {
     imageContainer.src = photo
     piecesContainer.innerHTML = ""
     imageContainer.onload = () => loadImg(imageContainer, piecesContainer)
+    window.noOfSwapps = 0;
+    swappsContainer.innerText = window.noOfSwapps;
   }
   nextImgBtn.onclick = async() => {
     if(!collapsedImageContainer.classList.contains("show"))collapsedImageContainer.classList.add("show")
@@ -47,6 +49,8 @@ window.addEventListener('load', async () => {
     imageContainer.src = photo
     piecesContainer.innerHTML = ""
     imageContainer.onload = () => loadImg(imageContainer, piecesContainer)
+    window.noOfSwapps = 0;
+    swappsContainer.innerText = window.noOfSwapps;
   }
 })
 
