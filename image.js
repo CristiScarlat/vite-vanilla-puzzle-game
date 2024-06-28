@@ -14,21 +14,44 @@ const cutImageUp = (image, piecesContainer, numColsToCut, numRowsToCut) => {
       imagePieces.push(canvas.toDataURL());
     }
   }
-  piecesContainer.style = `
-    display: grid;
-    gap: 0.1rem;
-    grid-template-columns: ${widthOfOnePiece}px ${widthOfOnePiece}px ${widthOfOnePiece}px ${widthOfOnePiece}px ${widthOfOnePiece}px ${widthOfOnePiece}px ${widthOfOnePiece}px ${widthOfOnePiece}px;
-    grid-template-rows: ${heightOfOnePiece}px ${heightOfOnePiece}px ${heightOfOnePiece}px ${heightOfOnePiece}px ${heightOfOnePiece}px ${heightOfOnePiece}px ${heightOfOnePiece}px ${heightOfOnePiece}px;`
-    imagePieces.shuffle().forEach((image, index) => {
-    const img = document.createElement('img');
-    img.crossOrigin="anonymous"
-    img.src = image;
-    piecesContainer.append(img)
-  })
+  return imagePieces.shuffle();
 }
 
+const renderPuzzle = (photos, piecesContainer) => {
+  piecesContainer.innerHTML = "";
+    photos.forEach((image, index, arr) => {
+      const img = document.createElement('img');
+      img.crossOrigin="anonymous"
+      img.src = image;
+      img.addEventListener("click", () => handleSwapp(arr, index, piecesContainer))
+      piecesContainer.append(img)
+    })
+}
+
+const handleSwapp = (photos, index, container) => {
+  if(indexesToSwapp.length < 2){
+    indexesToSwapp.push(index);
+    const images = container.getElementsByTagName("img");
+    const list = Array.from(images);
+    list[index].style.border = "2px solid red";
+    list[index].style.width = `${list[index].width}px`;
+  }
+  if(indexesToSwapp.length === 2){
+    const newList = Array.from(photos);
+    const temp = newList[indexesToSwapp[0]]
+    newList[indexesToSwapp[0]] = newList[indexesToSwapp[1]]
+    newList[indexesToSwapp[1]] = temp
+    indexesToSwapp = []
+    window.noOfSwapps++;
+    const swappsContainer = document.querySelector('span[data-swapps]');
+    swappsContainer.innerText = window.noOfSwapps;
+    renderPuzzle(newList, container)
+  }
+}
 export const loadImg = (image, piecesContainer) => {
   image.crossOrigin="anonymous"
-  cutImageUp(image, piecesContainer, 8, 8);
-  console.log("end")
+  piecesContainer.style.width = image.width + "px";
+  piecesContainer.style.height = image.height + "px";
+  const shuffledImages = cutImageUp(image, piecesContainer, 8, 8);
+  renderPuzzle(shuffledImages, piecesContainer)
 }

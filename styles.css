@@ -1,8 +1,11 @@
 
-
+body{
+    min-height: 100vh;
+}
 
 @media only screen and (max-width: 480px) {
     #pexels-photo {
         width: 95%;
+        margin: 2.5%;
     }
 }
