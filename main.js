@@ -45,6 +45,7 @@ window.addEventListener('load', async () => {
     if(!collapsedImageContainer.classList.contains("show"))collapsedImageContainer.classList.add("show");
     index--;
     photo = await getImgFromPexels(index);
+    photographer.innerHTML = `<span class="me-2">Photo by:</span>${photo.photographer}`;
     imageContainer.src = photo.src.large;
     piecesContainer.innerHTML = "";
     imageContainer.onload = () => loadImg(imageContainer, piecesContainer);
@@ -55,6 +56,7 @@ window.addEventListener('load', async () => {
     if(!collapsedImageContainer.classList.contains("show"))collapsedImageContainer.classList.add("show");
     index++;
     photo = await getImgFromPexels(index);
+    photographer.innerHTML = `<span class="me-2">Photo by:</span>${photo.photographer}`;
     imageContainer.src = photo.src.large;
     piecesContainer.innerHTML = "";
     imageContainer.onload = () => loadImg(imageContainer, piecesContainer);
