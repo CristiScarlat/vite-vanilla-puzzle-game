@@ -18,7 +18,11 @@
         <label style="white-space: nowrap;">Select a photo from <a href="https://www.pexels.com/" target="_blank">Pexels</a></label>
         <button class="btn btn-outline-light" style="white-space: nowrap;" data-next-btn><i class="fas fa-chevron-right"></i></button>
       </div>
+
       <div class="d-flex justify-content-center align-items-center  pt-2 border-top border-secondary-subtle">
+        <a href="/help.html" class="btn btn-outline-light me-2">
+         <span>&#x3F;</span> Help
+        </a>
         <button class="btn btn-outline-light" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOriginalImage" aria-expanded="false" aria-controls="collapseExample">
           Hide Image
         </button>
@@ -27,6 +31,9 @@
     </header>
     <main>
       <section class="image-container d-flex flex-column align-items-center gap-1">
+        <div class="pexels-photo-info text-center">
+
+        </div>
         <div class="collapse show" id="collapseOriginalImage">
           <img src="" alt="puzzle-pexels-img" id="pexels-photo"/>
         </div>

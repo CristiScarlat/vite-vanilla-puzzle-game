@@ -11,7 +11,7 @@ export const getImgFromPexels = async (photoIndex) => {
     prevPage = page;
     const pexelsResObj = await getPexelsCuratedPhotos(page);
     totalPhotos = pexelsResObj.total_results;
-    photosList = pexelsResObj.photos.map(photo => photo.src.large)
+    photosList = pexelsResObj.photos
   }
   return photosList[arrIdx];
 }

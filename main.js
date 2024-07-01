@@ -1,14 +1,21 @@
 import './styles.css'
 import { getImgFromPexels } from './pexels';
-import {loadImg} from "./image.js";
-import {fisherYatesShuffle} from "./utils.js";
+import { loadImg } from "./image.js";
+import { fisherYatesShuffle } from "./utils.js";
 
 window.addEventListener('load', async () => {
   Array.prototype.shuffle = function () {return fisherYatesShuffle(this);}
   window.indexesToSwapp = [];
   window.noOfSwapps = 0;
   let index = 0;
-  let photo = await getImgFromPexels(index);
+  let photo = null;
+  try{
+    photo = await getImgFromPexels(index);
+    console.log(photo)
+  }
+  catch (e) {
+    alert("There was a problem getting image from Pexels, please try again later.");
+  }
   const swappsContainer = document.querySelector('span[data-swapps]');
   swappsContainer.innerText = window.noOfSwapps;
   const imageContainer = document.getElementById("pexels-photo");
@@ -17,7 +24,11 @@ window.addEventListener('load', async () => {
   const nextImgBtn = document.querySelector('button[data-next-btn]');
   const collpaseImageBtn = document.querySelector('button[data-bs-toggle="collapse"]')
   const collapsedImageContainer = document.getElementById('collapseOriginalImage');
-  imageContainer.src = photo
+  const photoInfoContainer = document.querySelector('.pexels-photo-info');
+  const photographer = document.createElement("strong");
+  photographer.innerHTML = `<span class="me-2">Photo by:</span>${photo.photographer}`;
+  photoInfoContainer.append(photographer);
+  imageContainer.src = photo.src.large;
   imageContainer.onload = () => loadImg(imageContainer, piecesContainer)
   const handleMutationChange = (par) => {
     if(par[par.length - 1]?.target?.classList.contains("show")){
@@ -35,7 +46,7 @@ window.addEventListener('load', async () => {
     console.log("start")
     index--;
     photo = await getImgFromPexels(index);
-    imageContainer.src = photo
+    imageContainer.src = photo.src.large
     piecesContainer.innerHTML = ""
     imageContainer.onload = () => loadImg(imageContainer, piecesContainer)
     window.noOfSwapps = 0;
@@ -46,7 +57,7 @@ window.addEventListener('load', async () => {
     index++;
     console.log("start")
     photo = await getImgFromPexels(index);
-    imageContainer.src = photo
+    imageContainer.src = photo.src.large
     piecesContainer.innerHTML = ""
     imageContainer.onload = () => loadImg(imageContainer, piecesContainer)
     window.noOfSwapps = 0;
