@@ -42,24 +42,22 @@ window.addEventListener('load', async () => {
   observer.observe(collapsedImageContainer, { attributes: true })
   prevImgBtn.onclick = async() => {
     if(index===0)return;
-    if(!collapsedImageContainer.classList.contains("show"))collapsedImageContainer.classList.add("show")
-    console.log("start")
+    if(!collapsedImageContainer.classList.contains("show"))collapsedImageContainer.classList.add("show");
     index--;
     photo = await getImgFromPexels(index);
-    imageContainer.src = photo.src.large
-    piecesContainer.innerHTML = ""
-    imageContainer.onload = () => loadImg(imageContainer, piecesContainer)
+    imageContainer.src = photo.src.large;
+    piecesContainer.innerHTML = "";
+    imageContainer.onload = () => loadImg(imageContainer, piecesContainer);
     window.noOfSwapps = 0;
     swappsContainer.innerText = window.noOfSwapps;
   }
   nextImgBtn.onclick = async() => {
-    if(!collapsedImageContainer.classList.contains("show"))collapsedImageContainer.classList.add("show")
+    if(!collapsedImageContainer.classList.contains("show"))collapsedImageContainer.classList.add("show");
     index++;
-    console.log("start")
     photo = await getImgFromPexels(index);
-    imageContainer.src = photo.src.large
-    piecesContainer.innerHTML = ""
-    imageContainer.onload = () => loadImg(imageContainer, piecesContainer)
+    imageContainer.src = photo.src.large;
+    piecesContainer.innerHTML = "";
+    imageContainer.onload = () => loadImg(imageContainer, piecesContainer);
     window.noOfSwapps = 0;
     swappsContainer.innerText = window.noOfSwapps;
   }
