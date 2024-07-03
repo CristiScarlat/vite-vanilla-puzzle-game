@@ -11,7 +11,6 @@ window.addEventListener('load', async () => {
   let photo = null;
   try{
     photo = await getImgFromPexels(index);
-    console.log(photo)
   }
   catch (e) {
     alert("There was a problem getting image from Pexels, please try again later.");
@@ -29,7 +28,7 @@ window.addEventListener('load', async () => {
   photographer.innerHTML = `<span class="me-2">Photo by:</span>${photo.photographer}`;
   photoInfoContainer.append(photographer);
   imageContainer.src = photo.src.large;
-  imageContainer.onload = () => loadImg(imageContainer, piecesContainer)
+  imageContainer.onload = () => loadImg(piecesContainer);
   const handleMutationChange = (par) => {
     if(par[par.length - 1]?.target?.classList.contains("show")){
       collpaseImageBtn.innerText = "Hide Image"
@@ -48,7 +47,7 @@ window.addEventListener('load', async () => {
     photographer.innerHTML = `<span class="me-2">Photo by:</span>${photo.photographer}`;
     imageContainer.src = photo.src.large;
     piecesContainer.innerHTML = "";
-    imageContainer.onload = () => loadImg(imageContainer, piecesContainer);
+    imageContainer.onload = () => loadImg(piecesContainer);
     window.noOfSwapps = 0;
     swappsContainer.innerText = window.noOfSwapps;
   }
@@ -59,7 +58,7 @@ window.addEventListener('load', async () => {
     photographer.innerHTML = `<span class="me-2">Photo by:</span>${photo.photographer}`;
     imageContainer.src = photo.src.large;
     piecesContainer.innerHTML = "";
-    imageContainer.onload = () => loadImg(imageContainer, piecesContainer);
+    imageContainer.onload = () => loadImg(piecesContainer);
     window.noOfSwapps = 0;
     swappsContainer.innerText = window.noOfSwapps;
   }

@@ -1,20 +1,21 @@
 
 const cutImageUp = (image, piecesContainer, numColsToCut, numRowsToCut) => {
   const imagePieces = [];
-  const widthOfOnePiece = image.width/numColsToCut;
-  const heightOfOnePiece = image.height/numRowsToCut;
+  const { width, height} = image.getBoundingClientRect();
+  const widthOfOnePiece = width/numColsToCut;
+  const heightOfOnePiece = height/numRowsToCut;
 
-  for(let x = 0; x < numColsToCut; ++x) {
-    for(let y = 0; y < numRowsToCut; ++y) {
+  for(let y = 0; y < numRowsToCut; ++y) {
+    for(let x = 0; x < numColsToCut; ++x) {
       const canvas = document.createElement('canvas');
       canvas.width = widthOfOnePiece;
       canvas.height = heightOfOnePiece;
       const context = canvas.getContext('2d');
-      context.drawImage(image, x * widthOfOnePiece, y * heightOfOnePiece, widthOfOnePiece, heightOfOnePiece, 0, 0, canvas.width, canvas.height);
+      context.drawImage(image, x * (image.naturalWidth/numColsToCut), y * (image.naturalHeight/numRowsToCut), image.naturalWidth/numColsToCut, image.naturalHeight/numRowsToCut, 0, 0, widthOfOnePiece, heightOfOnePiece);
       imagePieces.push(canvas.toDataURL());
     }
   }
-  return imagePieces.shuffle();
+  return imagePieces;
 }
 
 const renderPuzzle = (photos, piecesContainer) => {
@@ -48,10 +49,12 @@ const handleSwapp = (photos, index, container) => {
     renderPuzzle(newList, container)
   }
 }
-export const loadImg = (image, piecesContainer) => {
-  image.crossOrigin="anonymous"
-  piecesContainer.style.width = image.width + "px";
-  piecesContainer.style.height = image.height + "px";
+export const loadImg = (piecesContainer) => {
+  const image = document.getElementById("pexels-photo");
+  const { width, height} = image.getBoundingClientRect();
+  image.crossOrigin="anonymous";
+  piecesContainer.style.width = width + "px";
+  piecesContainer.style.height = height + "px";
   const shuffledImages = cutImageUp(image, piecesContainer, 8, 8);
   renderPuzzle(shuffledImages, piecesContainer)
 }

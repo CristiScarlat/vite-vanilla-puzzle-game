@@ -30,9 +30,17 @@ body{
     max-width: 450px;
 }
 
+.image-container {
+    max-width: 70rem;
+    margin: auto;
+}
+
 @media only screen and (max-width: 480px) {
     #pexels-photo {
         width: 95%;
         margin: 2.5%;
+        overflow-clip-margin: unset;
+        overflow: unset;
+        vertical-align: unset;
     }
 }
