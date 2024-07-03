@@ -15,7 +15,7 @@ const cutImageUp = (image, piecesContainer, numColsToCut, numRowsToCut) => {
       imagePieces.push(canvas.toDataURL());
     }
   }
-  return imagePieces;
+  return imagePieces.shuffle();
 }
 
 const renderPuzzle = (photos, piecesContainer) => {

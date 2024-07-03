@@ -5,6 +5,7 @@ import { fisherYatesShuffle } from "./utils.js";
 
 window.addEventListener('load', async () => {
   Array.prototype.shuffle = function () {return fisherYatesShuffle(this);}
+  
   window.indexesToSwapp = [];
   window.noOfSwapps = 0;
   let index = 0;
