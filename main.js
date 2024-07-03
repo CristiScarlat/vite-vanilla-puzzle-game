@@ -3,9 +3,19 @@ import { getImgFromPexels } from './pexels';
 import { loadImg } from "./image.js";
 import { fisherYatesShuffle } from "./utils.js";
 
+const spinner = document.querySelector(".spinner-wrapper");
+
+const handleSpinner = (spinnerState) => {
+  if(spinnerState){
+    spinner.style.removeProperty("display");
+  }
+  else {
+    spinner.style.display = "none";
+  }
+}
 window.addEventListener('load', async () => {
   Array.prototype.shuffle = function () {return fisherYatesShuffle(this);}
-  
+  handleSpinner(true);
   window.indexesToSwapp = [];
   window.noOfSwapps = 0;
   let index = 0;
@@ -63,6 +73,8 @@ window.addEventListener('load', async () => {
     window.noOfSwapps = 0;
     swappsContainer.innerText = window.noOfSwapps;
   }
+  console.log("stop")
+  handleSpinner(false);
 })
 
 
